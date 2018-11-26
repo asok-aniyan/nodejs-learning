@@ -1,0 +1,100 @@
+<html>
+<head>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+
+	<script rel="stylesheet" src="jquery-3.3.1.min.js"></script>
+<script>
+	function update1(){
+		var usrname = $("input[name='username']:checked").val();
+		alert(usrname);
+		$('#p1').val(usrname);
+		alert(document.getElementById('p1').value)
+		document.getElementById('updateform').submit();
+	}
+
+	function delete1(){
+		alert("deleting")
+		var usrname = $("input[name='username']:checked").val();
+		alert(usrname);
+		$('#dp1').val(usrname);
+		alert(document.getElementById('dp1').value)
+		document.getElementById('deleteform').submit();
+	}
+	function ajaxcall(){
+		alert("qwertyu")
+		$.ajax({
+        type: 'post',
+        url: 'C:/Users/DB 6/Desktop/ilakkiya/PRACTICES/NODEPROJECT/public/javascript/fun1',
+        data: {
+            data:"dsfgf" ,
+        },
+        success: function(response, data) {
+          
+         //location.reload();
+}
+
+})
+	}
+
+	function ajaxcall1(){
+		alert("ajaxcall1")
+			$.ajax({
+        type: 'post',
+        url: '/userdetails/userdeatils/update_user',
+        data: {
+            data:"dsfgf" ,
+        },
+        success: function(response, data) {
+          
+         //location.reload();
+}
+
+})
+		
+}
+</script>
+</head>
+
+
+<body>
+<p> Dashboard </p>
+<table>
+<thead>
+	<td></td>
+	<td> USERNAME </td>
+	<td> PASSWORD </td>
+</thead>
+<tbody>
+
+	<% var i=0 %>
+	
+	<% userlist.forEach(function(u){ %>
+	<tr>
+	<td><input type="radio" name="username" id="username<%=u.slno %>" value="<%=u.slno %>"
+	 class="edit" <% if(i==0){ %> checked <% } %>  required/></td>
+
+	<td id="uname<%=u.slno%>"><%=u.username%></td>
+	<td id="pwd<%= u.slno%>"><%=u.password%></td>
+	</tr>
+	<%  }) %>
+
+
+</tbody>
+</table>
+<form action="/userdetails/userdetails/update_user" method="post" id="updateform">
+	<input id="upuname" name="upuname"/>
+	<input  hidden id="p1" name="p1"/>
+</form>
+<button type="text" onclick="update1()">UPDATE</button>
+
+<form action="/userdetails/userdetails/delete_user" method="post" id="deleteform">
+<input hidden id="dp1" name="dp1"/>
+</form>
+<button type="text" onclick="delete1()">DELETE USER</button>
+
+<button type="text" onclick="ajaxcall()">AJAX</button>
+<button type="text" onclick="ajaxcall1()">AJAX1</button>
+
+
+</body>
+</html>
